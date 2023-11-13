@@ -20,6 +20,11 @@ public class AuthOrderController {
         return ResponseEntity.ok(service.register(request));
     }
 
+    @GetMapping("/newOrderForCurrentUser/{userId}")
+    public Order getNewOrderForCurrentUser(@PathVariable("userId") Long userId) {
+        // Implement logic to retrieve a new order for the current user
+        return service.findNewOrderForCurrentUser(userId);
+    }
 
 
 

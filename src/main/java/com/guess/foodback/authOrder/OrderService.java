@@ -72,8 +72,10 @@ public class OrderService {
 
     }
 
-
-
+    public Order findNewOrderForCurrentUser(Long userId) {
+        // Implement logic to find a new order for the current user
+        return repository.findFirstByUser_IdAndStatus(userId, Status.NEW);
+    }
 
 
 
