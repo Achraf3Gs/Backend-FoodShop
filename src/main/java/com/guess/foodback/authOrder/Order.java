@@ -58,10 +58,13 @@ public class Order {
 
 
 
-        @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+
+        @ManyToOne(fetch = FetchType.EAGER, optional = false)
         @JoinColumn(name = "user_id", nullable = false)
-        @OnDelete(action = OnDeleteAction.CASCADE)
         private User user;
+
+
+
 
 
         public Integer getUserId() {

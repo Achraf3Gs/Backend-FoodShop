@@ -32,6 +32,15 @@ public class OrderService {
         Integer userId = request.getUserIdt();
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new RuntimeException("User not found")); // Assuming you have a UserRepository
+
+        Order existingOrder = repository.findFirstByUser_IdAndStatus(userId, Status.NEW);
+
+        if (existingOrder != null) {
+            // If an existing order is found, delete it
+            repository.delete(existingOrder);
+        }
+
+
         var order= Order.builder()
                 .items(request.getItems())
                 .totalPrice(request.getTotalPrice())
@@ -72,7 +81,7 @@ public class OrderService {
 
     }
 
-    public Order findNewOrderForCurrentUser(Long userId) {
+    public Order findNewOrderForCurrentUser(Integer userId) {
         // Implement logic to find a new order for the current user
         return repository.findFirstByUser_IdAndStatus(userId, Status.NEW);
     }

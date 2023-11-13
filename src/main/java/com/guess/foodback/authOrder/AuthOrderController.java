@@ -21,7 +21,7 @@ public class AuthOrderController {
     }
 
     @GetMapping("/newOrderForCurrentUser/{userId}")
-    public Order getNewOrderForCurrentUser(@PathVariable("userId") Long userId) {
+    public Order getNewOrderForCurrentUser(@PathVariable("userId") Integer userId) {
         // Implement logic to retrieve a new order for the current user
         return service.findNewOrderForCurrentUser(userId);
     }
