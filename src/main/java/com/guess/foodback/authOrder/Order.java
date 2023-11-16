@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -46,12 +47,14 @@ public class Order {
 
 
 
-        @Column(nullable = false, updatable = false)
-        private String createdAt;
+        @Column(nullable = false)
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date createdAt;
 
 
         @Column(nullable = false)
-        private String updatedAt;
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date updatedAt;
 
         @Enumerated(EnumType.STRING)
         private Status status;

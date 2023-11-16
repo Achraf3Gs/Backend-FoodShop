@@ -39,7 +39,7 @@ public ResponseEntity<OrderResponse>  payForOrder(@RequestBody PaymentRequest pa
 }
 
     @GetMapping("track/{orderId}")
-    public Order getOrder(@PathVariable Integer orderId) {
+    public Order getOrder(@PathVariable Long orderId) {
 
         Optional<Order> p =orderRepository.findById(Long.valueOf(orderId));
         return p.get();

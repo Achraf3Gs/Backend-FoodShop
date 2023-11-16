@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,8 +28,8 @@ public class OrderService {
             throw new RuntimeException("Cart is empty");
         }
         LocalDateTime ldt= LocalDateTime.now();
-        DateTimeFormatter format =DateTimeFormatter.ofPattern("yyyy_MM_mm_hhmmss");
-        String var= ldt.format(format);
+        Timestamp var = Timestamp.valueOf(ldt);
+
 
 
 
@@ -58,13 +60,13 @@ public class OrderService {
 
         String address = order.getAddress();
         LatLng addressLatLng = order.getAddressLatLng();
-        String createdAt= order.getCreatedAt();
+        Date createdAt= order.getCreatedAt();
         Integer id = Math.toIntExact(order.getId());
         List<OrderItem> items = order.getItems();
         String name = order.getName();
         Status status= order.getStatus();
         Double totalPrice= order.getTotalPrice();
-        String updatedAt= order.getUpdatedAt();
+        Date updatedAt= order.getUpdatedAt();
 
 
         return OrderResponse.builder()
@@ -115,13 +117,13 @@ public class OrderService {
         Integer order_id = Math.toIntExact(order.getId());
         String address = order.getAddress();
         LatLng addressLatLng = order.getAddressLatLng();
-        String createdAt = order.getCreatedAt();
+        Date createdAt = order.getCreatedAt();
 
         List<OrderItem> items = order.getItems();
         String name = order.getName();
         Status status = order.getStatus();
         Double totalPrice = order.getTotalPrice();
-        String updatedAt = order.getUpdatedAt();
+        Date updatedAt = order.getUpdatedAt();
         String message = "Payment Saved Successfully";
 
 
