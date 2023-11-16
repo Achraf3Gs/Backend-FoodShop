@@ -58,7 +58,9 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*120))
                 .signWith(getSignInKey(),SignatureAlgorithm.HS256)
                 .compact();
+
     }
+
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username= extractUsername(token);
@@ -78,13 +80,22 @@ public class JwtService {
     }
 
     private Claims  extractAllClaims(String token) {
+        try {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+        } catch (Exception ex) {
+            // Handle parsing exceptions
+            ex.printStackTrace(); // Log the exception for debugging
+            // You can throw a custom exception or return null indicating failure to parse
+            // Throw an exception or return a default Claims object depending on your logic
+            return null;
+        }
     }
+
 
     private Key getSignInKey() {
         byte[] keyBytes= Decoders.BASE64.decode(SECRET_KEY);
