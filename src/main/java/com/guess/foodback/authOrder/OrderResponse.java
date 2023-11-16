@@ -15,18 +15,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderResponse {
+    private String message;
 
     private Integer id;
 
     private List<OrderItem> items;
 
-    private  Double totalPrice;
+    private Double totalPrice;
 
     private String name;
 
     private String address;
 
-    private LatLng addressLatLng ;
+    private LatLng addressLatLng;
 
     private String paymentId;
 
@@ -37,6 +38,4 @@ public class OrderResponse {
     private Status status;
 
     private User user;
-
-
 }

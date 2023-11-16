@@ -5,17 +5,19 @@ import com.guess.foodback.entities.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+
 @Service
 @RequiredArgsConstructor
 public class OrderService {
 
     private final OrderRepository repository;
     private final UserRepository userRepository;
-
 
 
     public OrderResponse register(RegisterOrderRequest request) {
@@ -81,12 +83,64 @@ public class OrderService {
 
     }
 
+
     public Order findNewOrderForCurrentUser(Integer userId) {
         // Implement logic to find a new order for the current user
         return repository.findFirstByUser_IdAndStatus(userId, Status.NEW);
     }
 
 
+    public OrderResponse payForOrder(@RequestBody PaymentRequest request) {
+
+        String paymentId = request.getPaymentId();
+        Integer userId = request.getUserId();
+        Order order = findNewOrderForCurrentUser(userId);
+        if (order == null) {
+            String message = "Order Not Found!";
+            return OrderResponse.builder()
+                    .message(message)
+
+                    .build();
+        }
+
+
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new RuntimeException("User not found")); // Assuming you have a UserRepository
+
+        order.setPaymentId(paymentId);
+        order.setStatus(Status.PAYED);
+        // Assuming you have a method like saveOrder in your service class to save the changes.
+        repository.save(order);
+
+        Integer order_id = Math.toIntExact(order.getId());
+        String address = order.getAddress();
+        LatLng addressLatLng = order.getAddressLatLng();
+        String createdAt = order.getCreatedAt();
+
+        List<OrderItem> items = order.getItems();
+        String name = order.getName();
+        Status status = order.getStatus();
+        Double totalPrice = order.getTotalPrice();
+        String updatedAt = order.getUpdatedAt();
+        String message = "Payment Saved Successfully";
+
+
+        return OrderResponse.builder()
+                .message(message)
+                .address(address)
+                .addressLatLng(addressLatLng)
+                .createdAt(createdAt)
+                .id(order_id)
+                .items(items)
+                .name(name)
+                .status(status)
+                .totalPrice(totalPrice)
+                .updatedAt(updatedAt)
+                .user(user)
+                .paymentId(paymentId)
+                .build();
+
+    }
 
 
 }
