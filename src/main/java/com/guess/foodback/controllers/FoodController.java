@@ -45,7 +45,7 @@ public class FoodController {
         return (List<Food>) foodRepository.findAll();
     }
 
-    @GetMapping ("tag/{tag}")
+    @GetMapping ("foods/tag/{tag}")
         public List<Food>getAllFoodsByTag(@PathVariable String tag){
             return "All".equalsIgnoreCase(tag)?
                     getAllFoods():
@@ -53,7 +53,7 @@ public class FoodController {
                             .filter(food->food.getTags()!=null && food.getTags().contains(tag))
                             .collect(Collectors.toList());
         }
-    @GetMapping ("search/{searchTerm}")
+    @GetMapping ("foods/search/{searchTerm}")
     public List<Food>getAllFoodsBySearchTerm(@PathVariable String searchTerm){
         return getAllFoods().stream()
                         .filter(food->food.getName().toLowerCase().contains(searchTerm.toLowerCase()))
@@ -87,7 +87,7 @@ public class FoodController {
         }).orElseThrow(() -> new IllegalArgumentException("FoodId " + foodId + "not found"));
     }
 
-    @GetMapping("food/{foodId}")
+    @GetMapping("foods/food/{foodId}")
     public Food getFood(@PathVariable Long foodId) {
 
         Optional<Food> p = foodRepository.findById(foodId);

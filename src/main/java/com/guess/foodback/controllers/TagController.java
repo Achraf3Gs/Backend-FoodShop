@@ -18,17 +18,17 @@ public class TagController {
     @Autowired
     private TagRepository tagRepository;
 
-    @GetMapping("/tags")
+    @GetMapping("foods/tags")
     public List<Tag> getAllTeachers() {
         return (List<Tag>) tagRepository.findAll();
     }
 
-    @PostMapping("/tags/add")
+    @PostMapping("foods/tags/add")
     public Tag createTag(@Valid @RequestBody Tag tag) {
         return tagRepository.save(tag);
     }
 
-    @PutMapping("/tags/{tagId}")
+    @PutMapping("foods/tags/{tagId}")
     public Tag updateTag(@PathVariable Long tagId, @Valid @RequestBody Tag tagRequest) {
         return tagRepository.findById(tagId).map(tag -> {
             tag.setName(tagRequest.getName());
@@ -39,7 +39,7 @@ public class TagController {
     }
 
 
-    @DeleteMapping("/tags/{tagId}")
+    @DeleteMapping("foods/tags/{tagId}")
     public ResponseEntity<?> deleteTag(@PathVariable Long tagId) {
         return tagRepository.findById(tagId).map(tag -> {
             tagRepository.delete(tag);
@@ -50,7 +50,7 @@ public class TagController {
 
     }
 
-    @GetMapping("/tags/{tagId}")
+    @GetMapping("foods/tags/{tagId}")
     public Tag getTeacher(@PathVariable Long teacherId) {
 
         Optional<Tag> p = tagRepository.findById(teacherId);
