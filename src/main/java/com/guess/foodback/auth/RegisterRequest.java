@@ -26,6 +26,11 @@ public class RegisterRequest {
 
     private Role role;
 
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

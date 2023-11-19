@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -23,20 +24,21 @@ public class SecurityConfiguration {
 
     private final AuthenticationProvider authenticationProvider;
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors().and()
                 .csrf()
                 .disable()
+
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**")
-
-                .permitAll()
-
+                .requestMatchers("/", "/index.html", "/home", "/styles**", "/runtime**", "/polyfills**",
+                        "/main**","/favicon.png", "/assets/foods/**","/assets/stars/**").permitAll()
+                .requestMatchers("/api/v1/auth/**").permitAll()
                 .anyRequest()
                 .authenticated()
-
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -45,6 +47,9 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
+
 
 }
 
