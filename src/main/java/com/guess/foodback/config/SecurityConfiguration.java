@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/index.html", "/home", "/styles**", "/runtime**", "/polyfills**",
                         "/main**","/favicon.png", "/assets/foods/**","/assets/stars/**").permitAll()
-                .requestMatchers("/api/v1/auth/**")
+                .requestMatchers("/api/v1/auth/register","/api/v1/auth/authenticate" )
                 .permitAll()
                 .requestMatchers("/login")
                 .permitAll()
