@@ -36,8 +36,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/index.html", "/home", "/styles**", "/runtime**", "/polyfills**",
                         "/main**","/favicon.png", "/assets/foods/**","/assets/stars/**").permitAll()
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/api/v1/auth/**")
+                .permitAll()
+                .requestMatchers("/login")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
