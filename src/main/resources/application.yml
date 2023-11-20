@@ -1,0 +1,19 @@
+spring:
+    application:
+       name: todo-app
+    datasource:
+      url: jdbc:postgresql://dpg-cldp3n8hgaic73bm1ecg-a.singapore-postgres.render.com:5432/database_knu8
+      password: 1pg2ArtGELf3V1HDvwm0ykChmRPzi9ZG
+      username: database_knu8_user
+      driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+       ddl-auto: update
+       properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          format_sql: true
+       show-sql: true
+
+
+
