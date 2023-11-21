@@ -40,6 +40,8 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/login")
                 .permitAll()
+                .requestMatchers("/foods")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
