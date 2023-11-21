@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/login")
                 .permitAll()
-                .requestMatchers("/api/v1/auth/foods","/api/v1/auth/tags" )
+                .requestMatchers("/api/v1/auth/foods","/api/v1/auth/foods/tags" )
                 .permitAll()
                 .anyRequest()
                 .authenticated()
