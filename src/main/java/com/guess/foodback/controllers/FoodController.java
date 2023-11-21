@@ -39,7 +39,7 @@ public class FoodController {
 
 
 
-    @GetMapping("foods")
+    @GetMapping("api/v1/auth/foods")
     public List<Food> getAllFoods() {
 
         return (List<Food>) foodRepository.findAll();

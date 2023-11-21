@@ -18,7 +18,7 @@ public class TagController {
     @Autowired
     private TagRepository tagRepository;
 
-    @GetMapping("foods/tags")
+    @GetMapping("api/v1/auth/foods/tags")
     public List<Tag> getAllTeachers() {
         return (List<Tag>) tagRepository.findAll();
     }
